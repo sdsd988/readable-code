@@ -1,15 +1,25 @@
 package cleancode.minesweeper.tobe;
 
+import cleancode.minesweeper.tobe.cell.Cell;
+import cleancode.minesweeper.tobe.cell.EmptyCell;
+import cleancode.minesweeper.tobe.cell.LandMineCell;
+import cleancode.minesweeper.tobe.cell.NumberCell;
+import cleancode.minesweeper.tobe.gameLevel.GameLevel;
+
 import java.util.Arrays;
 import java.util.Random;
 
 public class GemaBoard {
 
     private final Cell[][] board;
-    public static final int LAND_MINE_COUNT = 10;
+    private final int landMineCount;
 
-    public GemaBoard(int rowSize, int colSize) {
+    public GemaBoard(GameLevel gameLevel) {
+        int rowSize = gameLevel.getRowSize();
+        int colSize = gameLevel.getColSize();
         board = new Cell[rowSize][colSize];
+        landMineCount = gameLevel.getLandMineCount();
+
     }
 
     public void flag(int rowIndex, int colIndex) {
@@ -67,19 +77,18 @@ public class GemaBoard {
 
     public void initializeGame() {
 
-        int rowSize = board.length;
-        int colSize = board[0].length;
+        int rowSize = getRowSize();
+        int colSize = getColSize();
         for (int row = 0; row < rowSize; row++) {
             for (int col = 0; col <colSize; col++) {
-                board[row][col] = Cell.create();
+                board[row][col] = new EmptyCell();
             }
         }
 
-        for (int i = 0; i < LAND_MINE_COUNT; i++) {
+        for (int i = 0; i < landMineCount; i++) {
             int landMineCol = new Random().nextInt(colSize);
             int landMineRow = new Random().nextInt(rowSize);
-            Cell landMineCell = findCell(landMineRow, landMineCol);
-            landMineCell.turnOnLandMine();
+            board[landMineRow][landMineCol] = new LandMineCell();
         }
 
         for (int row = 0; row < rowSize; row++) {
@@ -88,8 +97,11 @@ public class GemaBoard {
                     continue;
                 }
                 int count = countNearByMines(row, col);
-                Cell cell = findCell(row, col);
-                cell.updateNearbyLandMineCount(count);
+                if (count == 0) {
+                    continue;
+                }
+                NumberCell numberCell = new NumberCell(count);
+                board[row][col] = numberCell;
             }
         }
     }
