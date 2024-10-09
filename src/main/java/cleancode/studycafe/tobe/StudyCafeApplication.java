@@ -1,16 +1,18 @@
 package cleancode.studycafe.tobe;
 
-import cleancode.minesweeper.tobe.io.ConsoleInputHandler;
-import cleancode.minesweeper.tobe.io.ConsoleOutputHandler;
-import cleancode.minesweeper.tobe.io.InputHandler;
-import cleancode.minesweeper.tobe.io.OutputHandler;
+import cleancode.studycafe.tobe.io.ConSoleInputHandler;
+import cleancode.studycafe.tobe.io.ConSoleOutputHandler;
+import cleancode.studycafe.tobe.io.InputHandler;
+import cleancode.studycafe.tobe.io.OutputHandler;
 
 public class StudyCafeApplication {
 
     public static void main(String[] args) {
-        InputHandler inputHandler = new ConsoleInputHandler();
-        OutputHandler outputHandler = new ConsoleOutputHandler();
-        StudyCafePassMachine studyCafePassMachine = new StudyCafePassMachine();
+
+        InputHandler inputHandler = new ConSoleInputHandler();
+        OutputHandler outputHandler = new ConSoleOutputHandler();
+
+        StudyCafePassMachine studyCafePassMachine = new StudyCafePassMachine(inputHandler,outputHandler);
         studyCafePassMachine.run();
     }
 

@@ -1,11 +1,11 @@
-package cleancode.studycafe.asis.io;
+package cleancode.studycafe.tobe.io;
 
-import cleancode.studycafe.asis.model.StudyCafeLockerPass;
-import cleancode.studycafe.asis.model.StudyCafePass;
+import cleancode.studycafe.tobe.model.StudyCafeLockerPass;
+import cleancode.studycafe.tobe.model.StudyCafePass;
 
 import java.util.List;
 
-public class ConsoleOutputHandler implements OutputHandler {
+public class ConSoleOutputHandler implements OutputHandler {
 
     @Override
     public void showWelcomeMessage() {

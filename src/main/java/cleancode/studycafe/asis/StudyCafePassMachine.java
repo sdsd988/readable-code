@@ -1,8 +1,8 @@
 package cleancode.studycafe.asis;
 
 import cleancode.studycafe.asis.exception.AppException;
-import cleancode.studycafe.asis.io.ConsoleInputHandler;
-import cleancode.studycafe.asis.io.ConsoleOutputHandler;
+import cleancode.studycafe.asis.io.InputHandler;
+import cleancode.studycafe.asis.io.OutputHandler;
 import cleancode.studycafe.asis.io.StudyCafeFileHandler;
 import cleancode.studycafe.asis.model.StudyCafeLockerPass;
 import cleancode.studycafe.asis.model.StudyCafePass;
@@ -12,8 +12,8 @@ import java.util.List;
 
 public class StudyCafePassMachine {
 
-    private final ConsoleInputHandler inputHandler = new ConsoleInputHandler();
-    private final ConsoleOutputHandler outputHandler = new ConsoleOutputHandler();
+    private final InputHandler inputHandler = new InputHandler();
+    private final OutputHandler outputHandler = new OutputHandler();
 
     public void run() {
         try {
