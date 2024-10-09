@@ -5,7 +5,7 @@ import cleancode.studycafe.tobe.model.StudyCafePass;
 
 import java.util.List;
 
-public class ConSoleOutputHandler implements OutputHandler {
+public class ConsoleOutputHandler implements OutputHandler {
 
     @Override
     public void showWelcomeMessage() {

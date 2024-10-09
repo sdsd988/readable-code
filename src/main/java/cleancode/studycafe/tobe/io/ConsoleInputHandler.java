@@ -7,7 +7,7 @@ import cleancode.studycafe.tobe.model.StudyCafePassType;
 import java.util.List;
 import java.util.Scanner;
 
-public class ConSoleInputHandler implements InputHandler {
+public class ConsoleInputHandler implements InputHandler {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
