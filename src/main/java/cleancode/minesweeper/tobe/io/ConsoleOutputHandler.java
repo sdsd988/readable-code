@@ -1,7 +1,8 @@
 package cleancode.minesweeper.tobe.io;
 
-import cleancode.minesweeper.tobe.AppException;
-import cleancode.minesweeper.tobe.GemaBoard;
+import cleancode.minesweeper.tobe.GameException;
+import cleancode.minesweeper.tobe.GameBoard;
+import cleancode.minesweeper.tobe.position.CellPosition;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -16,7 +17,7 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     @Override
-    public void showBoard(GemaBoard board) {
+    public void showBoard(GameBoard board) {
 
         String joiningAlphabet = generateColAlphabets(board);
 
@@ -25,13 +26,14 @@ public class ConsoleOutputHandler implements OutputHandler {
         for (int row = 0; row < board.getRowSize(); row++) {
             System.out.printf("%2d  ", row + 1);
             for (int col = 0; col < board.getColSize(); col++) {
-                System.out.print(board.getSign(row,col) + " ");
+                CellPosition cellPosition = CellPosition.of(row, col);
+                System.out.print(board.getSign(cellPosition) + " ");
             }
             System.out.println();
         }
     }
 
-    private String generateColAlphabets(GemaBoard board) {
+    private String generateColAlphabets(GameBoard board) {
         List<String> alphabets = IntStream.range(0, board.getColSize())
                 .mapToObj(index -> (char) ('a' + index))
                 .map(Object::toString)
@@ -64,7 +66,7 @@ public class ConsoleOutputHandler implements OutputHandler {
     }
 
     @Override
-    public void showExceptionMessage(AppException e) {
+    public void showExceptionMessage(GameException e) {
         System.out.println(e.getMessage());
     }
 
