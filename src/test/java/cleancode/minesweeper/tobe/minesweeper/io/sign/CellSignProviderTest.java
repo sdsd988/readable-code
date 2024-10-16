@@ -1,17 +1,11 @@
 package cleancode.minesweeper.tobe.minesweeper.io.sign;
 
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshot;
-
-import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshotStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CellSignProviderTest {
 
@@ -111,20 +105,27 @@ class CellSignProviderTest {
         assertTrue(result4);
     }
 
+
     @Test
-    @DisplayName("동등성 테스트")
-    void equalsTest() {
+    @DisplayName("셀 스냅샷이 일치하면 True 반환")
+    void testProvide() {
 
         //given
-        CellSnapshot numberCell1 = CellSnapshot.of(CellSnapshotStatus.NUMBER,3);
-        CellSnapshot numberCell2 = CellSnapshot.of(CellSnapshotStatus.NUMBER,3);
+        CellSnapshot uncheckedCell = CellSnapshot.ofUnchecked();
+        CellSnapshot numberCell = CellSnapshot.ofNumber(3);
+        CellSnapshot emptyCell = CellSnapshot.ofEmpty();
+        CellSnapshot flagCell = CellSnapshot.ofFlag();
 
         //when
-        boolean result = numberCell1.equals(numberCell2);
+        String uncheckedSign = CellSignProvider.UNCHECKED.provide(uncheckedCell);
+        String numberSign = CellSignProvider.NUMBER.provide(numberCell);
+        String emptySign = CellSignProvider.EMPTY.provide(emptyCell);
+        String flagSign = CellSignProvider.FLAG.provide(flagCell);
 
         //then
-
-        assertTrue(result);
-
+        assertEquals("□", uncheckedSign);
+        assertEquals("3", numberSign);
+        assertEquals("■", emptySign);
+        assertEquals("⚑", flagSign);
     }
 }
