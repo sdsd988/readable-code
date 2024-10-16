@@ -12,6 +12,4 @@ public enum StudyCafePassType {
         this.description = description;
     }
 
-
-
 }
