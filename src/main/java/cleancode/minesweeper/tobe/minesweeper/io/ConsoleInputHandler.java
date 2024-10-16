@@ -14,15 +14,15 @@ public class ConsoleInputHandler implements InputHandler {
     @Override
     public UserAction getUserActionFromUser() {
         String userInput = SCANNER.nextLine();
-        if("1".equals(userInput)) {
+
+        if ("1".equals(userInput)) {
             return UserAction.OPEN;
         }
-        if("2".equals(userInput)) {
+        if ("2".equals(userInput)) {
             return UserAction.FLAG;
         }
 
         return UserAction.UNKNOWN;
-
     }
 
     @Override

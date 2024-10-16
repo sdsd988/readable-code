@@ -1,11 +1,11 @@
 package cleancode.minesweeper.tobe.minesweeper.io;
 
 import cleancode.minesweeper.tobe.minesweeper.board.GameBoard;
-import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshot;
+import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
+import cleancode.minesweeper.tobe.minesweeper.exception.GameException;
 import cleancode.minesweeper.tobe.minesweeper.io.sign.CellSignFinder;
 import cleancode.minesweeper.tobe.minesweeper.io.sign.CellSignProvider;
-import cleancode.minesweeper.tobe.minesweeper.board.position.CellPosition;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -13,7 +13,6 @@ import java.util.stream.IntStream;
 public class ConsoleOutputHandler implements OutputHandler {
 
     private final CellSignFinder cellSignFinder = new CellSignFinder();
-
 
     @Override
     public void showGameStartComments() {
@@ -31,9 +30,11 @@ public class ConsoleOutputHandler implements OutputHandler {
             System.out.printf("%2d  ", row + 1);
             for (int col = 0; col < board.getColSize(); col++) {
                 CellPosition cellPosition = CellPosition.of(row, col);
+
                 CellSnapshot snapshot = board.getSnapshot(cellPosition);
 //                String cellSign = cellSignFinder.findCellSignFrom(snapshot);
                 String cellSign = CellSignProvider.findCellSignFrom(snapshot);
+
                 System.out.print(cellSign + " ");
             }
             System.out.println();
@@ -43,9 +44,9 @@ public class ConsoleOutputHandler implements OutputHandler {
 
     private String generateColAlphabets(GameBoard board) {
         List<String> alphabets = IntStream.range(0, board.getColSize())
-                .mapToObj(index -> (char) ('a' + index))
-                .map(Object::toString)
-                .toList();
+            .mapToObj(index -> (char) ('a' + index))
+            .map(Object::toString)
+            .toList();
         return String.join(" ", alphabets);
     }
 

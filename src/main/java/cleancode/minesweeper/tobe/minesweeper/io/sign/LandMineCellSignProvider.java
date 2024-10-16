@@ -3,10 +3,9 @@ package cleancode.minesweeper.tobe.minesweeper.io.sign;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshot;
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshotStatus;
 
-public class LandMineCellSignProvider implements CellSignProvidable{
+public class LandMineCellSignProvider implements CellSignProvidable {
 
     private static final String LAND_MINE_SIGN = "☼";
-
 
     @Override
     public boolean supports(CellSnapshot cellSnapshot) {
@@ -17,4 +16,5 @@ public class LandMineCellSignProvider implements CellSignProvidable{
     public String provide(CellSnapshot cellSnapshot) {
         return LAND_MINE_SIGN;
     }
+
 }

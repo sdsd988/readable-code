@@ -7,19 +7,19 @@ import java.util.List;
 public class CellSignFinder {
 
     private static final List<CellSignProvidable> CELL_SIGN_PROVIDERS = List.of(
-            new EmptyCellSignProvider(),
-            new LandMineCellSignProvider(),
-            new FlagCellSignProvider(),
-            new NumberCellSingProvider(),
-            new UncheckedCellSignProvider()
+        new EmptyCellSignProvider(),
+        new FlagCellSignProvider(),
+        new LandMineCellSignProvider(),
+        new NumberCellSignProvider(),
+        new UncheckedCellSignProvider()
     );
 
     public String findCellSignFrom(CellSnapshot snapshot) {
-
         return CELL_SIGN_PROVIDERS.stream()
-                .filter(provider -> provider.supports(snapshot))
-                .findFirst()
-                .map(provider -> provider.provide(snapshot))
-                .orElseThrow(() -> new IllegalArgumentException("확인 할 수 없는 셀입니다."));
+            .filter(provider -> provider.supports(snapshot))
+            .findFirst()
+            .map(provider -> provider.provide(snapshot))
+            .orElseThrow(() -> new IllegalArgumentException("확인할 수 없는 셀입니다."));
     }
+
 }
