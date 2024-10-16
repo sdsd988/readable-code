@@ -2,8 +2,14 @@ package cleancode.minesweeper.tobe.minesweeper.io.sign;
 
 import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshot;
 
+import cleancode.minesweeper.tobe.minesweeper.board.cell.CellSnapshotStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -81,6 +87,7 @@ class CellSignProviderTest {
         assertEquals("□", result);
     }
 
+
     @Test
     @DisplayName("셀 스냅샷이 일치하면 True 반환")
     void testSupport() {
@@ -98,11 +105,26 @@ class CellSignProviderTest {
         boolean result4 = CellSignProvider.FLAG.supports(flagCell);
 
         //then
-        assertEquals(true, result1);
-        assertEquals(true, result2);
-        assertEquals(true, result3);
-        assertEquals(true, result4);
+        assertTrue(result1);
+        assertTrue(result2);
+        assertTrue(result3);
+        assertTrue(result4);
+    }
 
+    @Test
+    @DisplayName("동등성 테스트")
+    void equalsTest() {
+
+        //given
+        CellSnapshot numberCell1 = CellSnapshot.of(CellSnapshotStatus.NUMBER,3);
+        CellSnapshot numberCell2 = CellSnapshot.of(CellSnapshotStatus.NUMBER,3);
+
+        //when
+        boolean result = numberCell1.equals(numberCell2);
+
+        //then
+
+        assertTrue(result);
 
     }
 }
